@@ -1,0 +1,35 @@
+{
+  "name": "jullie",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Personal todo assistant",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "cross-env NODE_ENV=production node ./server.js",
+    "start:dev": "cross-env NODE_ENV=development nodemon ./server.js",
+    "lint": "eslint **/*.js",
+    "lint:fix": "eslint --fix **/*.js",
+    "test": "jest"
+  },
+  "keywords": [
+    "todo"
+  ],
+  "author": "Iryna Burlaka",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "firebase": "^10.12.5",
+    "joi": "^17.11.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^9.8.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-standard": "^17.1.0"
+  }
+}
