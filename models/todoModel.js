@@ -1,6 +1,6 @@
-import { model, Schema } from "mongoose";
+import { Schema } from "mongoose";
 
-const todoModel = new Schema({
+const TodoModel = new Schema({
   name: {
     type: String,
     required: [true, "Set name for contact"],
@@ -18,3 +18,4 @@ const todoModel = new Schema({
     enam: ["low" | "middle" | "high"],
   },
 });
+module.exports = TodoModel;
