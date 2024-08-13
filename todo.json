@@ -1,0 +1,14 @@
+{
+    "name": "Iryna Burlaka",
+    "description": "odwołanie",
+        
+    
+      "dueDate": {
+        type: Date,
+        default: Date.now,
+      },
+      "priority": "high"
+    
+      
+} 
+//enam: ["low" | "middle" | "high"],

@@ -11,11 +11,10 @@ const TodoModel = new Schema({
   },
   dueDate: {
     type: Date,
-    default: Date.now,
   },
   priority: {
     type: String,
-    enam: ["low" | "middle" | "high"],
+    enum: ["low" | "middle" | "high"],
   },
 });
 module.exports = TodoModel;
