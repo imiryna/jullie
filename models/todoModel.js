@@ -16,5 +16,9 @@ const TodoModel = new Schema({
     type: String,
     enum: ["low" | "middle" | "high"],
   },
+  completed: {
+    type: Boolean,
+    default: false,
+  },
 });
 module.exports = TodoModel;
