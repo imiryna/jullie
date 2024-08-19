@@ -15,7 +15,7 @@ async function connectToDatabase() {
     process.exit(1);
   }
 }
-
+connectToDatabase();
 const app = express();
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
