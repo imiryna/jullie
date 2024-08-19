@@ -1,6 +1,6 @@
-import { Schema } from "mongoose";
+import { model, Schema } from "mongoose";
 
-const TodoModel = new Schema({
+const todoModel = new Schema({
   name: {
     type: String,
     required: [true, "Set name for contact"],
@@ -21,4 +21,7 @@ const TodoModel = new Schema({
     default: false,
   },
 });
+
+const TodoModel = model("user", usersSchema);
+
 module.exports = TodoModel;
