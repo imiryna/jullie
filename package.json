@@ -28,6 +28,16 @@
     "nodemon": "^3.0.2"
   },
   "devDependencies": {
-    "eslint": "^9.8.0"
+    "eslint": "^9.8.0",
+    "husky": "^9.1.4",
+    "lint-staged": "^15.2.9"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint"
+    ]
+  },
+  "husky": {
+    "pre-commit": "lint-staged"
   }
 }
