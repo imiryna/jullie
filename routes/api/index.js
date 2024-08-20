@@ -1,5 +1,5 @@
-import router from "./todoRoute";
+import { router as TodoRouter } from "./todoRoute";
 
 module.exports = {
-  TodoRout,
+  TodoRouter,
 };

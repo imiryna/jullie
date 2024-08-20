@@ -1,6 +1,6 @@
 import { model, Schema } from "mongoose";
 
-const todoModel = new Schema({
+const todoSchema = new Schema({
   name: {
     type: String,
     required: [true, "Set name for contact"],
@@ -14,7 +14,6 @@ const todoModel = new Schema({
   },
   priority: {
     type: String,
-    enum: ["low" | "middle" | "high"],
   },
   completed: {
     type: Boolean,
@@ -22,6 +21,6 @@ const todoModel = new Schema({
   },
 });
 
-const TodoModel = model("user", usersSchema);
+const TodoModel = model("todo", todoSchema);
 
-module.exports = TodoModel;
+export { TodoModel };

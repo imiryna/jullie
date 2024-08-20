@@ -3,7 +3,7 @@ import morgan from "morgan";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import router from "routes/api";
+import { TodoRouter } from "./routes/api/todoRoute.js";
 
 dotenv.config();
 
@@ -26,13 +26,14 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
 
-app.use("/api/todo", router);
+app.use("/api/todo", TodoRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
 });
 
 app.use((err, req, res, next) => {
+  console.log("babaaam");
   res.status(err.status).json({ message: err.message });
 });
 
