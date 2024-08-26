@@ -50,7 +50,7 @@ app.post("/todos", async (req, res) => {
     //save newTodo to DB
     const saveTodo = TodoModel.create(newTodo);
 
-    res.status(201).json(newTodo);
+    res.status(201).json(saveTodo);
   } catch (error) {
     console.log(error);
   }
