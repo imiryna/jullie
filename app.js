@@ -66,7 +66,22 @@ app.get("/todos", async (req, res) => {
   }
 });
 
-app.get();
+app.get("/todos/:id", async (req, res) => {
+  try {
+    const { id } = req.params.id;
+    const allTodo = await TodoModel.find();
+
+    const todo = allTodo.find((item) => {
+      item.id === id;
+    });
+    res.status(200).json({
+      message: "Success",
+      todo,
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
 
 app.patch();
 
