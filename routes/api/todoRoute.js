@@ -3,7 +3,7 @@ import { getAllTodo } from "../../controllers/todoController.js";
 
 const TodoRouter = express.Router();
 
-TodoRouter.get("/", getAllTodo);
+// TodoRouter.get("/", getAllTodo);
 // TodoRouter.post("/", createNewTodo);
 
 // module.exports = router;

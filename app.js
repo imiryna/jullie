@@ -52,11 +52,19 @@ app.post("/todos", async (req, res) => {
 
     res.status(201).json(saveTodo);
   } catch (error) {
-    console.log(error);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 });
 
-app.get();
+app.get("/todos", async (req, res) => {
+  try {
+    const allTodo = await TodoModel.find();
+
+    res.status(200).json(allTodo);
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
 
 app.get();
 
