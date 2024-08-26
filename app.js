@@ -28,6 +28,18 @@ app.use(express.static("public"));
 
 app.use("/api/todo", TodoRouter);
 
+//create REST API
+
+app.post();
+
+app.get();
+
+app.get();
+
+app.delete();
+
+// =============================
+
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
 });

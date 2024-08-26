@@ -10,14 +10,14 @@ const getAllTodo = async (req, res, next) => {
   }
 };
 
-const createNewTodo = async (req, res, next) => {
-  try {
-    const result = await createTodo(req, res);
-    res.status(200).json(result);
-  } catch (error) {
-    next(error);
-  }
-};
+// const createNewTodo = async (req, res, next) => {
+//   try {
+//     const result = await createTodo(req, res);
+//     res.status(200).json(result);
+//   } catch (error) {
+//     next(error);
+//   }
+// };
 
-export { getAllTodo, createNewTodo };
+export { getAllTodo };
 // module.exports = getAllTodo;

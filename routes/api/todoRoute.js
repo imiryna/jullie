@@ -1,10 +1,10 @@
 import express from "express";
-import { getAllTodo, createNewTodo } from "../../controllers/todoController.js";
+import { getAllTodo } from "../../controllers/todoController.js";
 
 const TodoRouter = express.Router();
 
 TodoRouter.get("/", getAllTodo);
-TodoRouter.post("/", createNewTodo);
+// TodoRouter.post("/", createNewTodo);
 
 // module.exports = router;
 

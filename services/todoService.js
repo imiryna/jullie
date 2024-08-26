@@ -14,16 +14,16 @@ export const getTodoList = async (req, res) => {
 };
 
 // Create new todo
-export const createTodo = async (req, res) => {
-  try {
-    console.log(req.body);
-    const newTodo = new TodoModel(req.body);
-    await newTodo.save();
-    res.status(201).json(newTodo); // Відправити інформацію про створеного користувача
-  } catch (error) {
-    res.status(400).json({ message: "Error creating user", error });
-  }
-};
+// export const createTodo = async (req, res) => {
+//   try {
+//     console.log(req.body);
+//     const newTodo = new TodoModel(req.body);
+//     await newTodo.save();
+//     res.status(201).json(newTodo); // Відправити інформацію про створеного користувача
+//   } catch (error) {
+//     res.status(400).json({ message: "Error creating user", error });
+//   }
+// };
 
 // // Отримання користувача за ID
 // export const getUserById = async (req, res) => {
