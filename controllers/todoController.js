@@ -1,5 +1,5 @@
 // import { model } from "mongoose";
-import { getTodoList, createTodo } from "../services/todoService.js";
+//import { getTodoList, createTodo } from "../services/todoService.js";
 
 // const getAllTodo = async (req, res, next) => {
 //   try {
@@ -19,5 +19,5 @@ import { getTodoList, createTodo } from "../services/todoService.js";
 //   }
 // };
 
-export { getAllTodo };
+//export { getAllTodo };
 // module.exports = getAllTodo;

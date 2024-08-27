@@ -4,7 +4,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import { TodoRouter } from "./routes/api/todoRoute.js";
-import { TodoModel } from "./models/index.js";
+import { TodoModel } from "./models/todoModel.js";
 
 dotenv.config();
 
@@ -83,9 +83,9 @@ app.get("/todos/:id", async (req, res) => {
   }
 });
 
-app.patch();
+//app.patch();
 
-app.delete();
+//app.delete();
 
 // =============================
 
