@@ -13,12 +13,6 @@ export const getAllTodo = async (req, res) => {
 
 export const getTodoBiId = async (req, res) => {
   try {
-    const { id } = req.params.id;
-    const allTodo = await TodoModel.find();
-
-    const todo = allTodo.find((item) => {
-      item.id === id;
-    });
     res.status(200).json({
       message: "Success",
       todo,
