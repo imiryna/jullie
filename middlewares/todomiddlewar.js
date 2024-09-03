@@ -1,13 +1,13 @@
 export const checkTodoId = async (req, res, next) => {
-  const { id } = req.params.id;
-  const allTodo = await TodoModel.find();
+  const { id } = req.params;
 
-  const todo = allTodo.find((item) => {
-    item.id === id;
-  });
+  const todo = await TodoModel.findById(id);
+
   if (!todo) {
     return res.status(404).json({ msg: "Todo is unavailable" });
   }
+
   req.todo = todo;
+
   next();
 };

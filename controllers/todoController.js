@@ -15,7 +15,7 @@ export const getTodoBiId = async (req, res) => {
   try {
     res.status(200).json({
       message: "Success",
-      todo,
+      todo: req.todo,
     });
   } catch (error) {
     res.status(500).json({ message: "Internal Server Error" });
