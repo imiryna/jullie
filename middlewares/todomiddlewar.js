@@ -1,3 +1,5 @@
+import TodoModel from "../models/TodoModel.js";
+
 export const checkTodoId = async (req, res, next) => {
   const { id } = req.params;
 
@@ -8,6 +10,21 @@ export const checkTodoId = async (req, res, next) => {
   }
 
   req.todo = todo;
+
+  next();
+};
+
+export const validateTodoUpdate = async (req, res, next) => {
+  const { id } = req.params;
+  const { name, description, dueDate, priority } = req.body;
+
+  //check whether all of filds present
+
+  if (!name || !description || !dueDate || !priority) {
+    return res.status(400).json({ message: "All fields are required" });
+  }
+
+  checkTodoId();
 
   next();
 };

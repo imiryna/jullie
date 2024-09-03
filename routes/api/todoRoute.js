@@ -1,11 +1,21 @@
 import express from "express";
-import { createNewTodo } from "../../controllers/todoController.js";
+import { createNewTodo, getTodoBiId, updateTodo } from "../../controllers/todoController.js";
+import { validateTodoUpdate, checkTodoId } from "../../middlewares/todomiddlewar.js";
 
-const TodoRouter = express.Router();
+const router = express.Router();
 
 // TodoRouter.get("/", getAllTodo);
-TodoRouter.post("/", createNewTodo);
 
-// module.exports = router;
+//create REST API
 
-export { TodoRouter };
+router.get("/todos");
+
+router.post("/", createNewTodo);
+
+router.get("/todos/:id", checkTodoId, getTodoBiId);
+
+router.patch("/todos/", validateTodoUpdate, updateTodo);
+
+//router.delete();
+
+export { router };

@@ -3,7 +3,7 @@ import morgan from "morgan";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import { TodoRouter } from "./routes/api/todoRoute.js";
+import { router } from "./routes/api/todoRoute.js";
 import { TodoModel } from "./models/todoModel.js";
 
 dotenv.config();
@@ -27,18 +27,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
 
-app.use("/api/todo", TodoRouter);
-
-//create REST API
-
-app.post("/todos");
-app.get("/todos");
-
-app.get("/todos/:id");
-
-//app.patch();
-
-//app.delete();
+app.use("/api/", router);
 
 // =============================
 
