@@ -15,7 +15,7 @@ export const checkTodoId = async (req, res, next) => {
 };
 
 export const validateTodoUpdate = async (req, res, next) => {
-  const { id } = req.params;
+  //   const { id } = req.params;
   const { name, description, dueDate, priority } = req.body;
 
   //check whether all of filds present
@@ -24,7 +24,7 @@ export const validateTodoUpdate = async (req, res, next) => {
     return res.status(400).json({ message: "All fields are required" });
   }
 
-  checkTodoId();
+  //   checkTodoId();
 
   next();
 };

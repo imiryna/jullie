@@ -12,7 +12,7 @@ router.post("/", createNewTodo);
 
 router.get("/todos/:id", checkTodoId, getTodoBiId);
 
-router.patch("/todos/:id", validateTodoUpdate, updateTodo);
+router.patch("/todos/:id", validateTodoUpdate, checkTodoId, updateTodo);
 
 // router.delete("/todos/:id", checkTodoId, deleteTodo);
 
