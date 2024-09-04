@@ -1,34 +1,27 @@
 import { TodoModel } from "../models/todoModel.js";
 import HttpError from "../utils/httpError.js";
+import { catchAsync } from "../utils/catchAsync.js";
 
-export const checkTodoId = async (req, res, next) => {
-  try {
-    const { id } = req.params;
+export const checkTodoId = catchAsync(async (req, res, next) => {
+  const { id } = req.params;
 
-    const todo = await TodoModel.findById(id);
+  const todo = await TodoModel.findById(id);
 
-    if (!todo) {
-      throw new HttpError(404, "Todo is unavailable");
-    }
-
-    req.todo = todo;
-
-    next();
-  } catch (error) {
-    next(error);
+  if (!todo) {
+    throw new HttpError(404, "Todo is unavailable");
   }
-};
 
-export const validateTodoUpdate = async (req, res, next) => {
-  try {
-    const { name, description, dueDate, priority } = req.body;
+  req.todo = todo;
 
-    if (!name || !description || !dueDate || !priority) {
-      throw new HttpError(400, "All fields are required");
-    }
+  next();
+});
 
-    next();
-  } catch (error) {
-    next(error);
+export const validateTodoUpdate = catchAsync(async (req, res, next) => {
+  const { name, description, dueDate, priority } = req.body;
+
+  if (!name || !description || !dueDate || !priority) {
+    throw new HttpError(400, "All fields are required");
   }
-};
+
+  next();
+});
