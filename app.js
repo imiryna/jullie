@@ -3,7 +3,7 @@ import morgan from "morgan";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import { router } from "./routes/api/todoRoute.js";
+import router from "./routes/api/todoRoute.js";
 
 dotenv.config();
 

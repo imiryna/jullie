@@ -1,77 +1,61 @@
 // import { model } from "mongoose";
-import TodoModel from "../models/todoModel.js";
+import { TodoModel } from "../models/todoModel.js";
 // import { getTodoList, createTodo } from "../services/todoService.js";
+import { catchAsync } from "../utils/catchAsync.js";
 
-export const getAllTodo = async (req, res) => {
-  try {
-    const allTodo = await TodoModel.find();
+export const getAllTodo = catchAsync(async (req, res) => {
+  const allTodo = await TodoModel.find();
 
-    res.status(200).json(allTodo);
-  } catch (error) {
-    res.status(500).json({ message: "Internal Server Error" });
+  res.status(200).json(allTodo);
+});
+
+export const getTodoBiId = catchAsync(async (req, res) => {
+  res.status(200).json({
+    message: "Success",
+    todo: req.todo,
+  });
+});
+
+export const createNewTodo = catchAsync(async (req, res) => {
+  const { name, description, dueDate, priority } = req.body;
+
+  // req.body validation
+  if (!name || !description || !dueDate || !priority) {
+    return res.status(400).json({ message: "All fields are required" });
   }
-};
 
-export const getTodoBiId = async (req, res) => {
-  try {
-    res.status(200).json({
-      message: "Success",
-      todo: req.todo,
-    });
-  } catch (error) {
-    res.status(500).json({ message: "Internal Server Error" });
-  }
-};
+  const newTodo = {
+    name,
+    description,
+    dueDate,
+    priority,
+  };
 
-export const createNewTodo = async (req, res) => {
-  try {
-    const { name, description, dueDate, priority } = req.body;
+  //save newTodo to DB
+  const saveTodo = TodoModel.create(newTodo);
 
-    // req.body validation
-    if (!name || !description || !dueDate || !priority) {
-      return res.status(400).json({ message: "All fields are required" });
-    }
+  res.status(201).json(saveTodo);
+});
 
-    const newTodo = {
+export const updateTodo = catchAsync(async (req, res) => {
+  const { name, description, dueDate, priority } = req.body;
+
+  const updatedTodo = await TodoModel.findByIdAndUpdate(
+    req.todo._id,
+    {
       name,
       description,
       dueDate,
       priority,
-    };
+    },
+    { new: true }
+  );
 
-    //save newTodo to DB
-    const saveTodo = TodoModel.create(newTodo);
-
-    res.status(201).json(saveTodo);
-  } catch (error) {
-    res.status(500).json({ message: "Internal Server Error" });
-  }
-};
-
-export const updateTodo = async (req, res) => {
-  const { name, description, dueDate, priority } = req.body;
-
-  try {
-    const updatedTodo = await TodoModel.findByIdAndUpdate(
-      req.todo._id,
-      {
-        name,
-        description,
-        dueDate,
-        priority,
-      },
-      { new: true }
-    );
-
-    res.status(200).json({
-      message: "Todo updated successfully",
-      todo: updatedTodo,
-    });
-  } catch (error) {
-    console.error("Error updating todo:", error);
-    res.status(500).json({ message: "Internal Server Error" });
-  }
-};
+  res.status(200).json({
+    message: "Todo updated successfully",
+    todo: updatedTodo,
+  });
+});
 
 //export { getAllTodo };
 // module.exports = getAllTodo;

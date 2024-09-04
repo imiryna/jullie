@@ -1,4 +1,4 @@
-import TodoModel from "../models/TodoModel.js";
+import { TodoModel } from "../models/todoModel.js";
 
 export const checkTodoId = async (req, res, next) => {
   try {
