@@ -1,4 +1,5 @@
 import { TodoModel } from "../models/todoModel.js";
+import HttpError from "../utils/httpError.js";
 
 export const checkTodoId = async (req, res, next) => {
   try {
@@ -7,7 +8,7 @@ export const checkTodoId = async (req, res, next) => {
     const todo = await TodoModel.findById(id);
 
     if (!todo) {
-      return res.status(404).json({ msg: "Todo is unavailable" });
+      throw new HttpError(404, "Todo is unavailable");
     }
 
     req.todo = todo;
@@ -20,16 +21,11 @@ export const checkTodoId = async (req, res, next) => {
 
 export const validateTodoUpdate = async (req, res, next) => {
   try {
-    //   const { id } = req.params;
     const { name, description, dueDate, priority } = req.body;
 
-    //check whether all of filds present
-
     if (!name || !description || !dueDate || !priority) {
-      return res.status(400).json({ message: "All fields are required" });
+      throw new HttpError(400, "All fields are required");
     }
-
-    //   checkTodoId();
 
     next();
   } catch (error) {
