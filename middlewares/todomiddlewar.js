@@ -1,30 +1,38 @@
 import TodoModel from "../models/TodoModel.js";
 
 export const checkTodoId = async (req, res, next) => {
-  const { id } = req.params;
+  try {
+    const { id } = req.params;
 
-  const todo = await TodoModel.findById(id);
+    const todo = await TodoModel.findById(id);
 
-  if (!todo) {
-    return res.status(404).json({ msg: "Todo is unavailable" });
+    if (!todo) {
+      return res.status(404).json({ msg: "Todo is unavailable" });
+    }
+
+    req.todo = todo;
+
+    next();
+  } catch (error) {
+    next(error);
   }
-
-  req.todo = todo;
-
-  next();
 };
 
 export const validateTodoUpdate = async (req, res, next) => {
-  //   const { id } = req.params;
-  const { name, description, dueDate, priority } = req.body;
+  try {
+    //   const { id } = req.params;
+    const { name, description, dueDate, priority } = req.body;
 
-  //check whether all of filds present
+    //check whether all of filds present
 
-  if (!name || !description || !dueDate || !priority) {
-    return res.status(400).json({ message: "All fields are required" });
+    if (!name || !description || !dueDate || !priority) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
+
+    //   checkTodoId();
+
+    next();
+  } catch (error) {
+    next(error);
   }
-
-  //   checkTodoId();
-
-  next();
 };
