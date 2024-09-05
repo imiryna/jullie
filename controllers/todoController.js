@@ -2,6 +2,9 @@
 import { TodoModel } from "../models/todoModel.js";
 // import { getTodoList, createTodo } from "../services/todoService.js";
 import { catchAsync } from "../utils/catchAsync.js";
+import HttpError from "../utils/httpError.js";
+
+import { cresteTodoDataValidator, updateTodoDataValidator } from "../utils/todoValidator.js";
 
 export const getAllTodo = catchAsync(async (req, res) => {
   const allTodo = await TodoModel.find();
@@ -17,12 +20,11 @@ export const getTodoBiId = catchAsync(async (req, res) => {
 });
 
 export const createNewTodo = catchAsync(async (req, res) => {
-  const { name, description, dueDate, priority } = req.body;
+  const { value, error } = cresteTodoDataValidator(req.body);
 
-  // req.body validation
-  if (!name || !description || !dueDate || !priority) {
-    return res.status(400).json({ message: "All fields are required" });
-  }
+  if (error) throw new HttpError(400, "Invalid todo data");
+
+  const { name, description, dueDate, priority } = value;
 
   const newTodo = {
     name,
@@ -38,7 +40,11 @@ export const createNewTodo = catchAsync(async (req, res) => {
 });
 
 export const updateTodo = catchAsync(async (req, res) => {
-  const { name, description, dueDate, priority } = req.body;
+  const { value, error } = updateTodoDataValidator(req.body);
+
+  if (error) throw new HttpError(400, "Invalid todo data");
+
+  const { name, description, dueDate, priority } = value;
 
   const updatedTodo = await TodoModel.findByIdAndUpdate(
     req.todo._id,
