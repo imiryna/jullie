@@ -62,6 +62,3 @@ export const updateTodo = catchAsync(async (req, res) => {
     todo: updatedTodo,
   });
 });
-
-//export { getAllTodo };
-// module.exports = getAllTodo;
