@@ -1,13 +1,13 @@
 // import { model } from "mongoose";
-import { TodoModel } from "../models/todoModel.js";
-// import { getTodoList, createTodo } from "../services/todoService.js";
+// import { TodoModel } from "../models/todoModel.js";
+import { getTodoList } from "../services/todoService.js";
 import { catchAsync } from "../utils/catchAsync.js";
 import HttpError from "../utils/httpError.js";
 
 import { cresteTodoDataValidator, updateTodoDataValidator } from "../utils/todoValidator.js";
 
 export const getAllTodo = catchAsync(async (req, res) => {
-  const allTodo = await TodoModel.find();
+  const allTodo = await getTodoList();
 
   res.status(200).json(allTodo);
 });

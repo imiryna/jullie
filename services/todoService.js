@@ -2,16 +2,16 @@ import { TodoModel } from "../models/todoModel.js";
 
 // get todo list
 
-// export const getTodoList = async (req, res) => {
-//   try {
-//     const todos = await TodoModel.find(); // To find all todos into database
-//     console.log(todos);
-//     res.status(200).json(todos);
-//   } catch (error) {
-//     console.log("catch");
-//     res.status(500).json({ message: "Error retrieving users", error });
-//   }
-// };
+export const getTodoList = async (req, res) => {
+  try {
+    const todos = await TodoModel.find(); // To find all todos into database
+    console.log(todos);
+    res.status(200).json(todos);
+  } catch (error) {
+    console.log("catch");
+    res.status(500).json({ message: "Error retrieving users", error });
+  }
+};
 
 // Create new todo
 // export const createTodo = async (req, res) => {
