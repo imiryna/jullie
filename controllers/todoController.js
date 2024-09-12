@@ -1,6 +1,6 @@
 // import { model } from "mongoose";
 // import { TodoModel } from "../models/todoModel.js";
-import { getTodoList } from "../services/todoService.js";
+import { getTodoList, createTodo } from "../services/todoService.js";
 import { catchAsync } from "../utils/catchAsync.js";
 import HttpError from "../utils/httpError.js";
 
@@ -34,7 +34,7 @@ export const createNewTodo = catchAsync(async (req, res) => {
   };
 
   //save newTodo to DB
-  const saveTodo = TodoModel.create(newTodo);
+  const saveTodo = createTodo.create(newTodo);
 
   res.status(201).json(saveTodo);
 });
