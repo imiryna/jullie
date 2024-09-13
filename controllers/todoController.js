@@ -1,10 +1,10 @@
 // import { model } from "mongoose";
-// import { TodoModel } from "../models/todoModel.js";
+import { TodoModel } from "../models/todoModel.js";
 import { getTodoList, createTodo } from "../services/todoService.js";
 import { catchAsync } from "../utils/catchAsync.js";
 import HttpError from "../utils/httpError.js";
 
-import { cresteTodoDataValidator, updateTodoDataValidator } from "../utils/todoValidator.js";
+// import { cresteTodoDataValidator, updateTodoDataValidator } from "../utils/todoValidator.js";
 
 export const getAllTodo = catchAsync(async (req, res) => {
   const allTodo = await getTodoList();
@@ -20,23 +20,12 @@ export const getTodoBiId = catchAsync(async (req, res) => {
 });
 
 export const createNewTodo = catchAsync(async (req, res) => {
-  const { value, error } = cresteTodoDataValidator(req.body);
+  const newTodo = await TodoModel.create(req.body);
 
-  if (error) throw new HttpError(400, "Invalid todo data");
-
-  const { name, description, dueDate, priority } = value;
-
-  const newTodo = {
-    name,
-    description,
-    dueDate,
-    priority,
-  };
-
-  //save newTodo to DB
-  const saveTodo = createTodo.create(newTodo);
-
-  res.status(201).json(saveTodo);
+  res.status(201).json({
+    message: "Success",
+    newTodo,
+  });
 });
 
 export const updateTodo = catchAsync(async (req, res) => {
