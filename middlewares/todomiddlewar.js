@@ -1,3 +1,4 @@
+import { Types } from "mongoose";
 import { TodoModel } from "../models/todoModel.js";
 import HttpError from "../utils/httpError.js";
 import { catchAsync } from "../utils/catchAsync.js";
@@ -5,6 +6,10 @@ import { cresteTodoDataValidator, updateTodoDataValidator } from "../utils/todoV
 
 export const checkTodoId = catchAsync(async (req, res, next) => {
   const { id } = req.params;
+
+  const idValidate = Types.ObjectId.isValid();
+
+  if (!idValidate) throw new HttpError(404, "Todo not found");
 
   const todo = await TodoModel.findById(id);
 

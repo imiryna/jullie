@@ -51,3 +51,11 @@ export const updateTodo = catchAsync(async (req, res) => {
     todo: updatedTodo,
   });
 });
+
+export const getTodo = catchAsync(async (req, res, next) => {
+  const todo = await TodoModel.findById(req.params.id);
+  res.status(200).json({
+    message: "Todo updated successfully",
+    todo: todo,
+  });
+});
