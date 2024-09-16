@@ -1,6 +1,6 @@
 // import { model } from "mongoose";
 import { TodoModel } from "../models/todoModel.js";
-import { getTodoList, createTodo } from "../services/todoService.js";
+import { getTodoList, createTodo, getTodoBiId } from "../services/todoService.js";
 import { catchAsync } from "../utils/catchAsync.js";
 import HttpError from "../utils/httpError.js";
 
@@ -12,15 +12,16 @@ export const getAllTodo = catchAsync(async (req, res) => {
   res.status(200).json(allTodo);
 });
 
-export const getTodoBiId = catchAsync(async (req, res) => {
+export const getOneTodoBiId = catchAsync(async (req, res) => {
+  const oneTodo = await getTodoBiId(req.params.id);
   res.status(200).json({
     message: "Success",
-    todo: req.todo,
+    todo: oneTodo,
   });
 });
 
 export const createNewTodo = catchAsync(async (req, res) => {
-  const newTodo = await TodoModel.create(req.body);
+  const newTodo = await createTodo(req.body);
 
   res.status(201).json({
     message: "Success",
@@ -58,4 +59,12 @@ export const getTodo = catchAsync(async (req, res, next) => {
     message: "Todo updated successfully",
     todo: todo,
   });
+});
+
+export const deleteTodo = catchAsync(async (req, res, next) => {
+  // const todo = await TodoModel.findById(req.params.id);
+  // res.status(200).json({
+  //   message: "Todo updated successfully",
+  //   todo: todo,
+  // });
 });

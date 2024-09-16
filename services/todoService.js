@@ -5,7 +5,7 @@ import { TodoModel } from "../models/todoModel.js";
 export const getTodoList = async () => {
   try {
     const todos = await TodoModel.find(); // To find all todos into database
-    console.log(todos);
+
     return todos;
   } catch (error) {
     console.log("catch");
@@ -13,11 +13,20 @@ export const getTodoList = async () => {
   }
 };
 
+export const getTodoBiId = async (id) => {
+  try {
+    const todoBiId = await TodoModel.findById(id);
+
+    return todoBiId;
+  } catch (error) {
+    res.status(500).json({ message: "Error retrieving user", error });
+  }
+};
+
 // Create new todo
 
 export const createTodo = async (req, res) => {
   try {
-    console.log(req.body);
     const newTodo = new TodoModel(req.body);
     await newTodo.save();
     res.status(201).json(newTodo); // Відправити інформацію про створеного користувача
