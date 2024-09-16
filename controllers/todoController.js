@@ -13,7 +13,8 @@ export const getAllTodo = catchAsync(async (req, res) => {
 });
 
 export const getOneTodoBiId = catchAsync(async (req, res) => {
-  const oneTodo = await getTodoBiId(req.params.id);
+  const { id } = req.params;
+  const oneTodo = await getTodoBiId(id);
   res.status(200).json({
     message: "Success",
     todo: oneTodo,
