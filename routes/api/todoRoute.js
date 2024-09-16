@@ -16,6 +16,4 @@ router.patch("/todos/:id", validateTodoUpdate, checkTodoId, updateTodo);
 
 router.delete("/todos/:id", checkTodoId, deleteTodo);
 
-// router.delete("/todos/:id", checkTodoId, deleteTodo);
-
 export default router;

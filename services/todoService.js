@@ -13,9 +13,9 @@ export const getTodoList = async () => {
   }
 };
 
-export const getTodoBiId = async (id) => {
+export const getTodoBiId = async (req, res) => {
   try {
-    const todoBiId = await TodoModel.findById(id);
+    const todoBiId = await TodoModel.findById(req.params.id));
 
     return todoBiId;
   } catch (error) {
