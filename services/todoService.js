@@ -35,29 +35,34 @@ export const createTodo = async (req, res) => {
   }
 };
 
-// // Отримання користувача за ID
-// export const getUserById = async (req, res) => {
-//   try {
-//     const user = await User.findById(req.params.id); // Знайти користувача за ID
-//     if (!user) return res.status(404).json({ message: "User not found" });
-//     res.status(200).json(user);
-//   } catch (error) {
-//     res.status(500).json({ message: "Error retrieving user", error });
-//   }
-// };
+export const updateTodoBiId = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedData = req.body;
 
-// // Оновлення користувача за ID
-// export const updateUser = async (req, res) => {
-//   try {
-//     const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true }); // Оновити користувача
-//     if (!user) return res.status(404).json({ message: "User not found" });
-//     res.status(200).json(user);
-//   } catch (error) {
-//     res.status(400).json({ message: "Error updating user", error });
-//   }
-// };
+    const updatedOne = await TodoModel.findByIdAndUpdate(id, updatedData);
 
-// // Видалення користувача за ID
+    res.status(200).json({
+      message: "Todo updated successfully",
+      todo: updatedOne,
+    });
+  } catch (error) {
+    res.status(400).json({ message: "Error updating user", error });
+  }
+};
+
+// Delete todo bi ID
+
+export const deleteTodo = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const oneTodo = await TodoModel.deleteOne({ _id: new ObjectId(id) });
+    res.status(201).json(oneTodo);
+  } catch (error) {
+    res.status(400).json({ message: "Error delete user", error });
+  }
+};
+
 // export const deleteUser = async (req, res) => {
 //   try {
 //     const user = await User.findByIdAndDelete(req.params.id); // Видалити користувача

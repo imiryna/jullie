@@ -1,6 +1,6 @@
 // import { model } from "mongoose";
 import { TodoModel } from "../models/todoModel.js";
-import { getTodoList, createTodo, getTodoBiId } from "../services/todoService.js";
+import { getTodoList, createTodo, getTodoBiId, updateTodoBiId } from "../services/todoService.js";
 import { catchAsync } from "../utils/catchAsync.js";
 import HttpError from "../utils/httpError.js";
 
@@ -37,16 +37,9 @@ export const updateTodo = catchAsync(async (req, res) => {
 
   const { name, description, dueDate, priority } = value;
 
-  const updatedTodo = await TodoModel.findByIdAndUpdate(
-    req.todo._id,
-    {
-      name,
-      description,
-      dueDate,
-      priority,
-    },
-    { new: true }
-  );
+  const { id } = req.params;
+
+  const updatedTodo = await updateTodoBiId(id, value);
 
   res.status(200).json({
     message: "Todo updated successfully",
