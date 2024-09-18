@@ -2,7 +2,7 @@ import { Types } from "mongoose";
 import { TodoModel } from "../models/todoModel.js";
 import HttpError from "../utils/httpError.js";
 import { catchAsync } from "../utils/catchAsync.js";
-import { cresteTodoDataValidator, updateTodoDataValidator } from "../utils/todoValidator.js";
+import { createTodoDataValidator, updateTodoDataValidator } from "../utils/todoValidator.js";
 
 export const checkTodoId = catchAsync(async (req, res, next) => {
   const { id } = req.params;
@@ -23,9 +23,7 @@ export const checkTodoId = catchAsync(async (req, res, next) => {
 });
 
 export const validateTodoUpdate = catchAsync(async (req, res, next) => {
-  // const { name, description, dueDate, priority } = req.body;
-
-  const { value, error } = cresteTodoDataValidator(req.body);
+  const { value, error } = createTodoDataValidator(req.body);
 
   if (error) throw new HttpError(400, "Invalid todo data");
 

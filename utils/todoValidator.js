@@ -1,6 +1,6 @@
 import Joi from "joi";
 
-export const cresteTodoDataValidator = (data) => {
+export const createTodoDataValidator = (data) => {
   Joi.object().keys(
     {
       name: Joi.string.min(3).max(12).required(),

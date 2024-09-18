@@ -4,8 +4,6 @@ import { getTodoList, createTodo, getTodoBiId, updateTodoBiId } from "../service
 import { catchAsync } from "../utils/catchAsync.js";
 import HttpError from "../utils/httpError.js";
 
-// import { cresteTodoDataValidator, updateTodoDataValidator } from "../utils/todoValidator.js";
-
 export const getAllTodo = catchAsync(async (req, res) => {
   const allTodo = await getTodoList();
 
