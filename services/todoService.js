@@ -2,14 +2,16 @@ import { TodoModel } from "../models/todoModel.js";
 
 // get todo list
 
-export const getTodoList = async () => {
+export const getTodoList = async (req, res) => {
   try {
     const todos = await TodoModel.find(); // To find all todos into database
 
-    return todos;
+    res.status(200).json({
+      msg: "Successfully",
+      todo: todos,
+    });
   } catch (error) {
-    console.log("catch");
-    res.status(500).json({ message: "Error retrieving users", error });
+    res.status(400).json({ message: "Error retrieving todos", error });
   }
 };
 
@@ -17,9 +19,12 @@ export const getTodoBiId = async (req, res) => {
   try {
     const todoBiId = await TodoModel.findById(req.params.id);
 
-    return todoBiId;
+    res.status(200).json({
+      msg: "Successfully",
+      todo: todoBiId,
+    });
   } catch (error) {
-    res.status(500).json({ message: "Error retrieving user", error });
+    res.status(400).json({ message: "Error retrieving todo", error });
   }
 };
 
@@ -29,9 +34,10 @@ export const createTodo = async (req, res) => {
   try {
     const newTodo = new TodoModel(req.body);
     await newTodo.save();
-    res.status(201).json(newTodo); // Відправити інформацію про створеного користувача
+
+    res.status(201).json(newTodo);
   } catch (error) {
-    res.status(400).json({ message: "Error creating user", error });
+    res.status(400).json({ message: "Error creating todo", error });
   }
 };
 
@@ -40,14 +46,14 @@ export const updateTodoBiId = async (req, res) => {
     const { id } = req.params;
     const updatedData = req.body;
 
-    const updatedOne = await TodoModel.findByIdAndUpdate(id, updatedData);
+    const updatedOne = await TodoModel.findByIdAndUpdate(id, updatedData, { new: true, runValidators: true });
 
     res.status(200).json({
       message: "Todo updated successfully",
       todo: updatedOne,
     });
   } catch (error) {
-    res.status(400).json({ message: "Error updating user", error });
+    res.status(400).json({ message: "Error updating todo", error });
   }
 };
 
@@ -56,19 +62,12 @@ export const updateTodoBiId = async (req, res) => {
 export const deleteTodo = async (req, res) => {
   try {
     const { id } = req.params;
-    const oneTodo = await TodoModel.deleteOne({ _id: new ObjectId(id) });
-    res.status(201).json(oneTodo);
+
+    // const oneTodo = await TodoModel.deleteOne({ _id: new ObjectId(id) });
+    await TodoModel.deleteOne(id);
+
+    res.status(404);
   } catch (error) {
     res.status(400).json({ message: "Error delete user", error });
   }
 };
-
-// export const deleteUser = async (req, res) => {
-//   try {
-//     const user = await User.findByIdAndDelete(req.params.id); // Видалити користувача
-//     if (!user) return res.status(404).json({ message: "User not found" });
-//     res.status(200).json({ message: "User deleted successfully" });
-//   } catch (error) {
-//     res.status(500).json({ message: "Error deleting user", error });
-//   }
-// };
