@@ -1,5 +1,5 @@
 // import { model } from "mongoose";
-import { TodoModel } from "../models/todoModel.js";
+// import { TodoModel } from "../models/todoModel.js";
 import { getTodoList, createTodo, getTodoBiId, updateTodoBiId } from "../services/todoService.js";
 import { catchAsync } from "../utils/catchAsync.js";
 import HttpError from "../utils/httpError.js";
@@ -35,7 +35,7 @@ export const updateTodo = catchAsync(async (req, res) => {
 
   if (error) throw new HttpError(400, "Invalid todo data");
 
-  const { name, description, dueDate, priority } = value;
+  // const { name, description, dueDate, priority } = value;
 
   const { id } = req.params;
 
