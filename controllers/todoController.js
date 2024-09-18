@@ -1,5 +1,4 @@
-// import { model } from "mongoose";
-// import { TodoModel } from "../models/todoModel.js";
+import { updateTodoDataValidator } from "../utils/todoValidator.js";
 import { getTodoList, createTodo, getTodoBiId, updateTodoBiId } from "../services/todoService.js";
 import { catchAsync } from "../utils/catchAsync.js";
 import HttpError from "../utils/httpError.js";
