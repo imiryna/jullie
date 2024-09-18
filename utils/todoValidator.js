@@ -7,7 +7,7 @@ export const createTodoDataValidator = (data) => {
       description: Joi.string().min(5).required(),
       dueDate: Joi.date(),
       priority: Joi.string(),
-    }.validation(date)
+    }.validation(data)
   );
 };
 
@@ -18,6 +18,6 @@ export const updateTodoDataValidator = (data) => {
       description: Joi.string().min(5),
       dueDate: Joi.date(),
       priority: Joi.string(),
-    }.validation(date)
+    }.validation(data)
   );
 };

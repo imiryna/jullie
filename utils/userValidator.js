@@ -11,7 +11,7 @@ export const createUserDataValidator = (data) => {
       repeat_password: Joi.ref("password"),
 
       access_token: [Joi.string(), Joi.number()],
-    }.validation(date)
+    }.validation(data)
   );
 };
 
@@ -22,6 +22,6 @@ export const updateUserDataValidator = (data) => {
       name: Joi.string.min(3).max(24).required(),
       email: Joi.string().email(),
       password: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{3,30}$")),
-    }.validation(date)
+    }.validation(data)
   );
 };
