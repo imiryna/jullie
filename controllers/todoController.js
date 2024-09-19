@@ -1,5 +1,5 @@
 import { updateTodoDataValidator } from "../utils/todoValidator.js";
-import { getTodoList, createTodo, getTodoBiId, updateTodoBiId } from "../services/todoService.js";
+import { getTodoList, createTodo, getTodoBiId, updateTodoBiId, deleteTodo } from "../services/todoService.js";
 import { catchAsync } from "../utils/catchAsync.js";
 import HttpError from "../utils/httpError.js";
 
@@ -42,9 +42,10 @@ export const updateTodo = catchAsync(async (req, res) => {
     message: "Todo updated successfully",
     todo: updatedTodo,
   });
+  next();
 });
 
-export const getTodo = catchAsync(async (req, res, next) => {
+export const getTodo = catchAsync(async (req, res) => {
   const todo = await TodoModel.findById(req.params.id);
   res.status(200).json({
     message: "Todo updated successfully",
@@ -52,10 +53,11 @@ export const getTodo = catchAsync(async (req, res, next) => {
   });
 });
 
-export const deleteTodo = catchAsync(async (req, res, next) => {
-  // const todo = await TodoModel.findById(req.params.id);
-  // res.status(200).json({
-  //   message: "Todo updated successfully",
-  //   todo: todo,
-  // });
+export const todoDeleted = catchAsync(async (req, res) => {
+  const todo = await deleteTodo(req.params.id);
+
+  res.status(200).json({
+    message: "Todo updated successfully",
+    todo: todo,
+  });
 });

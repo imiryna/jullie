@@ -2,6 +2,7 @@ import { catchAsync } from "../utils/catchAsync.js";
 import HttpError from "../utils/httpError.js";
 import { getAllUsers, getUserBiId, createUser, updatedUser, deleteUser } from "../services/userService.js";
 import { updateUserDataValidator } from "../utils/catchAsync.js";
+import { AsyncLocalStorage } from "async_hooks";
 
 export const getUsers = catchAsync(async (req, res) => {
   const users = await getAllUsers();
@@ -42,4 +43,8 @@ export const updateUser = catchAsync(async (req, res) => {
     msg: "User updated successfully",
     user: user,
   });
+});
+
+export const userDelete = catchAsync(async (req, res) => {
+  const { id } = req.params;
 });

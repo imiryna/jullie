@@ -63,7 +63,6 @@ export const deleteTodo = async (req, res) => {
   try {
     const { id } = req.params;
 
-    // const oneTodo = await TodoModel.deleteOne({ _id: new ObjectId(id) });
     await TodoModel.deleteOne(id);
 
     res.status(404);
