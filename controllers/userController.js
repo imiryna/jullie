@@ -1,6 +1,7 @@
 import { catchAsync } from "../utils/catchAsync.js";
 import HttpError from "../utils/httpError.js";
 import { getAllUsers, getUserBiId, createUser, updatedUser, deleteUser } from "../services/userService.js";
+import { updateUserDataValidator } from "../utils/catchAsync.js";
 
 export const getUsers = catchAsync(async (req, res) => {
   const users = await getAllUsers();
@@ -28,4 +29,17 @@ export const createNewUser = catchAsync(async (req, res) => {
   });
 });
 
-export const updatedUser = catchAsync(async (req, res) => {});
+export const updateUser = catchAsync(async (req, res) => {
+  const { value, error } = updateUserDataValidator(req.body);
+
+  if (error) throw new HttpError(400, "Invalid user data");
+
+  const { id } = req.params;
+
+  const user = await updatedUser(id, value);
+
+  res.status(200).json({
+    msg: "User updated successfully",
+    user: user,
+  });
+});
