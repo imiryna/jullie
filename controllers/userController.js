@@ -45,6 +45,10 @@ export const updateUser = catchAsync(async (req, res) => {
   });
 });
 
-export const userDelete = catchAsync(async (req, res) => {
-  const { id } = req.params;
+export const userDeleted = catchAsync(async (req, res) => {
+  const user = await deleteUser(req.params.id);
+  res.status(200).json({
+    msg: "User deleted successfully",
+    user: user,
+  });
 });
