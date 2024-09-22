@@ -1,6 +1,6 @@
 import express from "express";
 import { getAllTodo, createNewTodo, getOneTodoBiId, updateTodo, todoDeleted } from "../../controllers/todoController.js";
-import { validateTodoUpdate, checkTodoId } from "../../middlewares/todomiddlewar.js";
+import { validateTodoUpdate, checkTodoId } from "../../middlewares/todoMiddleware.js";
 
 export const router = express.Router();
 

@@ -3,8 +3,8 @@ import morgan from "morgan";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import { router } from "./routes/api/todoRoute.js";
-import { router } from "./routes/api/userRouter.js";
+import { router as todoRouter } from "./routes/api/todoRoute.js";
+import { router as userRouter } from "./routes/api/userRouter.js";
 
 dotenv.config();
 
@@ -30,8 +30,8 @@ app.use(express.static("public"));
 // =============================
 const pathPrefix = "/api/v1";
 
-app.use(`${pathPrefix}/todos`, router);
-app.use(`${pathPrefix}/users`, router);
+app.use(`${pathPrefix}/todos`, todoRouter);
+app.use(`${pathPrefix}/users`, userRouter);
 
 //== Error handler =============
 

@@ -1,6 +1,6 @@
-import { createUserDataValidator } from "../utils/userValidator";
+import { createUserDataValidator } from "../utils/userValidator.js";
 import { Types } from "mongoose";
-import { UsersModel } from "../models/userModel";
+import { UsersModel } from "../models/userModel.js";
 import HttpError from "../utils/httpError.js";
 import { catchAsync } from "../utils/catchAsync.js";
 

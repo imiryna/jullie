@@ -1,6 +1,6 @@
 import express from "express";
-import { getUsers, getOneUserBiId, createNewUser, updateUser, userDeleted } from "../../controllers/userController";
-import { validateUserUpdate, checkUserId } from "../../middlewares/userMiddlewara";
+import { getUsers, getOneUserBiId, createNewUser, updateUser, userDeleted } from "../../controllers/userController.js";
+import { validateUserUpdate, checkUserId } from "../../middlewares/userMiddleware.js";
 
 export const router = express.Router();
 

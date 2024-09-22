@@ -1,8 +1,7 @@
 import { catchAsync } from "../utils/catchAsync.js";
 import HttpError from "../utils/httpError.js";
 import { getAllUsers, getUserBiId, createUser, updatedUser, deleteUser } from "../services/userService.js";
-import { updateUserDataValidator } from "../utils/catchAsync.js";
-import { AsyncLocalStorage } from "async_hooks";
+import { updateUserDataValidator } from "../utils/userValidator.js";
 
 export const getUsers = catchAsync(async (req, res) => {
   const users = await getAllUsers();
