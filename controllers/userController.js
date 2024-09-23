@@ -2,6 +2,9 @@ import { catchAsync } from "../utils/catchAsync.js";
 import HttpError from "../utils/httpError.js";
 import { getAllUsers, getUserBiId, createUser, updatedUser, deleteUser } from "../services/userService.js";
 import { updateUserDataValidator } from "../utils/userValidator.js";
+import pkg from "bcrypt";
+
+const bcrypt = pkg;
 
 export const getUsers = catchAsync(async (req, res) => {
   const users = await getAllUsers();
@@ -21,7 +24,14 @@ export const getOneUserBiId = catchAsync(async (req, res) => {
 });
 
 export const createNewUser = catchAsync(async (req, res) => {
-  const userData = await createUser(req.body);
+  const { password, ...restUserData } = req.body;
+
+  const salt = await bcrypt.genSalt(10);
+  const passwordHash = await bcrypt.hash(password, salt);
+  const userData = await createUser({
+    password: passwordHash,
+    ...restUserData,
+  });
 
   res.status(201).json({
     message: "Success",
