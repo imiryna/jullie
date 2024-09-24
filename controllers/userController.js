@@ -28,6 +28,7 @@ export const createNewUser = catchAsync(async (req, res) => {
 
   const salt = await bcrypt.genSalt(10);
   const passwordHash = await bcrypt.hash(password, salt);
+  const passwordValid = await bcrypt.compare("password", passwordHash);
   const userData = await createUser({
     password: passwordHash,
     ...restUserData,
