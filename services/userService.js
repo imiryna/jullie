@@ -2,40 +2,22 @@ import { UsersModel } from "../models/userModel.js";
 
 // get users
 
-export const getAllUsers = async (req, res) => {
-  try {
-    const allUsers = await UsersModel.find();
+export const getAllUsers = () => UsersModel.find();
 
-    res.status(200).json({
-      msg: "Successfully",
-    });
-  } catch (error) {
-    res.status(400).json({ message: "Error retrieving users", error });
-  }
-};
+export const getUserBiId = async (id) => await UsersModel.findById(id);
 
-export const getUserBiId = async (req, res) => {
-  try {
-    const userBiId = await UsersModel.findById(req.params.id);
+/**
+ * create new user
+ * @param {Object} userData
+ * @returns {Promis(User)}
+ */
 
-    res.status(200).json({
-      msg: "Successfully",
-      user: userBiId,
-    });
-  } catch (error) {
-    res.status(400).json({ message: "Error retrieving user", error });
-  }
-};
+export const createUser = async (userData) => {
+  const newUser = await UsersModel(userData);
 
-export const createUser = async (req, res) => {
-  try {
-    const newUser = new UsersModel(req.body);
-    await newUser.save();
+  newUser.password = undefined;
 
-    res.status(201).json(newUser);
-  } catch (error) {
-    res.status(400).json({ message: "Error creating user", error });
-  }
+  return newUser;
 };
 
 export const updatedUser = async (req, res) => {
