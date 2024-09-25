@@ -22,8 +22,18 @@ export const checkTodoId = catchAsync(async (req, res, next) => {
   next();
 });
 
-export const validateTodoUpdate = catchAsync(async (req, res, next) => {
+export const validateTodoCreate = catchAsync(async (req, res, next) => {
   const { value, error } = createTodoDataValidator(req.body);
+
+  if (error) throw new HttpError(400, "Invalid todo data");
+
+  req.body = value;
+
+  next();
+});
+
+export const validateTodoUpdate = catchAsync(async (req, res, next) => {
+  const { value, error } = updateTodoDataValidator(req.body);
 
   if (error) throw new HttpError(400, "Invalid todo data");
 
