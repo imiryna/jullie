@@ -36,11 +36,10 @@ export const updatedUser = async (req, res) => {
   }
 };
 
-export const deleteUser = async (req, res) => {
-  try {
-    const { id } = req.params.id;
-    await UsersModel.deleteOne(id);
+export const deleteUser = (id) => UsersModel.deleteOne(id);
 
-    res.status(404);
-  } catch (error) {}
+export const checkUserExists = async (filter) => {
+  const oneExists = await UsersModel.exists(filter);
+
+  if (oneExists) throw new HttpError(409, "User exists");
 };

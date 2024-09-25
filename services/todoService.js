@@ -1,4 +1,6 @@
 import { TodoModel } from "../models/todoModel.js";
+import { UsersModel } from "../models/userModel.js";
+import HttpError from "../utils/httpError.js";
 
 // get todo list
 
@@ -14,32 +16,19 @@ export const createTodo = async (todoData) => {
   return newTodo;
 };
 
-export const updateTodoBiId = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const updatedData = req.body;
+export const updateTodoBiId = async (id) => {
+  const updatedData = req.body;
 
-    const updatedOne = await TodoModel.findByIdAndUpdate(id, updatedData, { new: true, runValidators: true });
-
-    res.status(200).json({
-      message: "Todo updated successfully",
-      todo: updatedOne,
-    });
-  } catch (error) {
-    res.status(400).json({ message: "Error updating todo", error });
-  }
+  const updatedOne = await TodoModel.findByIdAndUpdate(id, updatedData, { new: true, runValidators: true });
+  return updatedOne;
 };
 
 // Delete todo bi ID
 
-export const deleteTodo = async (req, res) => {
-  try {
-    const { id } = req.params;
+export const deleteTodo = (id) => TodoModel.deleteOne(id);
 
-    await TodoModel.deleteOne(id);
+export const checkTodoExists = async (filter) => {
+  const oneExists = await TodoModel.exists(filter);
 
-    res.status(404);
-  } catch (error) {
-    res.status(400).json({ message: "Error delete user", error });
-  }
+  if (oneExists) throw new HttpError(409, "Todo exists");
 };

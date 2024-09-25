@@ -27,10 +27,6 @@ export const validateTodoUpdate = catchAsync(async (req, res, next) => {
 
   if (error) throw new HttpError(400, "Invalid todo data");
 
-  if (!name || !description || !dueDate || !priority) {
-    throw new HttpError(400, "All fields are required");
-  }
-
   req.body = value;
 
   next();
