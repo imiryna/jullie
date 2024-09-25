@@ -28,15 +28,10 @@ export const createNewTodo = catchAsync(async (req, res) => {
 });
 
 export const updateTodo = catchAsync(async (req, res) => {
-  const { value, error } = updateTodoDataValidator(req.body);
-
-  if (error) throw new HttpError(400, "Invalid todo data");
-
-  // const { name, description, dueDate, priority } = value;
-
   const { id } = req.params;
+  const { name, description, dueDate, priority } = req.body;
 
-  const updatedTodo = await updateTodoBiId(id, value);
+  const updatedTodo = await updateTodoBiId(id, req.body);
 
   res.status(200).json({
     message: "Todo updated successfully",
