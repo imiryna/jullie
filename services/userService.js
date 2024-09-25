@@ -4,7 +4,7 @@ import { UsersModel } from "../models/userModel.js";
 
 export const getAllUsers = () => UsersModel.find();
 
-export const getUserBiId = async (id) => await UsersModel.findById(id);
+export const getUserBiId = (id) => UsersModel.findById(id);
 
 /**
  * create new user

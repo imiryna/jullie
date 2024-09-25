@@ -2,43 +2,16 @@ import { TodoModel } from "../models/todoModel.js";
 
 // get todo list
 
-export const getTodoList = async (req, res) => {
-  try {
-    const todos = await TodoModel.find(); // To find all todos into database
+export const getTodoList = () => TodoModel.find(); // To find all todos into database
 
-    res.status(200).json({
-      msg: "Successfully",
-      todo: todos,
-    });
-  } catch (error) {
-    res.status(400).json({ message: "Error retrieving todos", error });
-  }
-};
-
-export const getTodoBiId = async (req, res) => {
-  try {
-    const todoBiId = await TodoModel.findById(req.params.id);
-
-    res.status(200).json({
-      msg: "Successfully",
-      todo: todoBiId,
-    });
-  } catch (error) {
-    res.status(400).json({ message: "Error retrieving todo", error });
-  }
-};
+export const getTodoBiId = (id) => TodoModel.findById(id);
 
 // Create new todo
 
-export const createTodo = async (req, res) => {
-  try {
-    const newTodo = new TodoModel(req.body);
-    await newTodo.save();
+export const createTodo = async (todoData) => {
+  const newTodo = await TodoModel(todoData);
 
-    res.status(201).json(newTodo);
-  } catch (error) {
-    res.status(400).json({ message: "Error creating todo", error });
-  }
+  return newTodo;
 };
 
 export const updateTodoBiId = async (req, res) => {
