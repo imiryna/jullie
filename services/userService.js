@@ -20,20 +20,28 @@ export const createUser = async (userData) => {
   return newUser;
 };
 
-export const updatedUser = async (req, res) => {
-  try {
-    const { id } = req.params.id;
-    const userData = req.body;
+// export const updatedUser = async (id, userData) => {
+//   try {
+//     const { id } = req.params.id;
+//     const userData = req.body;
 
-    const updatedUser = await UsersModel.findByIdAndUpdate(id, userData, { new: true, runValidators: true });
+//     const updatedUser = await UsersModel.findByIdAndUpdate(id, userData, { new: true, runValidators: true });
 
-    res.status(200).json({
-      msg: "User updated successfully",
-      user: updatedUser,
-    });
-  } catch (error) {
-    res.status(400).json({ message: "Error updating user", error });
-  }
+//     res.status(200).json({
+//       msg: "User updated successfully",
+//       user: updatedUser,
+//     });
+//   } catch (error) {
+//     res.status(400).json({ message: "Error updating user", error });
+//   }
+// };
+export const updatedUser = async (id, userData) => {
+  const user = await UsersModel.findById(id);
+
+  Object.keys(userData).forEach((key) => {
+    user[key] = userData[key];
+  });
+  return user.save();
 };
 
 export const deleteUser = (id) => UsersModel.deleteOne(id);

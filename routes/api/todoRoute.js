@@ -1,6 +1,6 @@
 import express from "express";
 import { getAllTodo, createNewTodo, getOneTodoBiId, updateTodo, todoDeleted } from "../../controllers/todoController.js";
-import { validateTodoUpdate, checkTodoId } from "../../middlewares/todoMiddleware.js";
+import { validateTodoCreate, validateTodoUpdate, checkTodoId } from "../../middlewares/todoMiddleware.js";
 
 export const router = express.Router();
 
@@ -8,7 +8,7 @@ export const router = express.Router();
 
 router.get("/", getAllTodo);
 
-router.post("/", createNewTodo);
+router.post("/", validateTodoCreate, createNewTodo);
 
 router.get("/todos/:id", checkTodoId, getOneTodoBiId);
 
