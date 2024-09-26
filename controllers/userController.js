@@ -1,7 +1,5 @@
 import { catchAsync } from "../utils/catchAsync.js";
-import HttpError from "../utils/httpError.js";
 import { getAllUsers, getUserBiId, createUser, updatedUser, deleteUser } from "../services/userService.js";
-import { updateUserDataValidator } from "../utils/userValidator.js";
 import pkg from "bcrypt";
 
 const bcrypt = pkg;

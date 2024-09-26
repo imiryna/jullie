@@ -1,9 +1,8 @@
 import { createUserDataValidator, updateUserDataValidator } from "../utils/userValidator.js";
 import { Types } from "mongoose";
-import { UsersModel } from "../models/userModel.js";
 import HttpError from "../utils/httpError.js";
 import { catchAsync } from "../utils/catchAsync.js";
-import { checkUserExists } from "../services/userService.js";
+import { checkUserExists, getUserBiId } from "../services/userService.js";
 
 export const checkUserId = catchAsync(async (req, res, next) => {
   const { id } = req.params;
@@ -12,7 +11,7 @@ export const checkUserId = catchAsync(async (req, res, next) => {
 
   if (!userValid) throw new HttpError(404, "User not found");
 
-  const user = UsersModel.findById(id);
+  const user = getUserBiId(id);
 
   if (!user) throw new HttpError(404, "User is unavailable");
 
@@ -26,7 +25,7 @@ export const checkCreateUserData = catchAsync(async (req, res, next) => {
 
   if (error) throw new HttpError(400, "Invalid user data");
 
-  const userExists = await UsersModel.exists({ email: value.email });
+  const userExists = await checkUserExists({ email: value.email, _id: { $ne: req.params.id } });
 
   if (userExists) {
     throw new HttpError(400, "User with this email exists");
@@ -42,7 +41,7 @@ export const validateUserUpdate = catchAsync(async (req, res, next) => {
 
   if (error) throw new HttpError(400, "Invalid user data");
 
-  await checkUserExists({ email: value.email });
+  await checkUserExists({ email: value.email, _id: { $ne: req.params.id } });
 
   req.body = value;
 
