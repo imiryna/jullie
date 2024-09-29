@@ -1,8 +1,5 @@
 import { catchAsync } from "../utils/catchAsync.js";
 import { getAllUsers, getUserBiId, createUser, updatedUser, deleteUser } from "../services/userService.js";
-import pkg from "bcrypt";
-
-const bcrypt = pkg;
 
 export const getUsers = catchAsync(async (req, res) => {
   const users = await getAllUsers();
@@ -24,9 +21,6 @@ export const getOneUserBiId = catchAsync(async (req, res) => {
 export const createNewUser = catchAsync(async (req, res) => {
   const { password, ...restUserData } = req.body;
 
-  const salt = await bcrypt.genSalt(10);
-  const passwordHash = await bcrypt.hash(password, salt);
-  const passwordValid = await bcrypt.compare("password", passwordHash);
   const userData = await createUser({
     password: passwordHash,
     ...restUserData,
