@@ -1,0 +1,3 @@
+const serverConfig = {
+  environment: process.env.NODE.ENV,
+};

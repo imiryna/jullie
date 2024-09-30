@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import { router as todoRouter } from "./routes/api/todoRoute.js";
 import { router as userRouter } from "./routes/api/userRouter.js";
+import { globalErrorHandler } from "./controllers/errorController.js";
 
 dotenv.config();
 
@@ -43,8 +44,6 @@ app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
 });
 
-app.use((err, req, res, next) => {
-  res.status(err.status ?? 500).json({ message: err.message });
-});
+app.use(globalErrorHandler);
 
 export default app;
