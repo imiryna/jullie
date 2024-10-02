@@ -1,6 +1,7 @@
 import Joi from "joi";
+import joiValidator from "./joiValidator.js";
 
-export const createUserDataValidator = (data) => {
+export const createUserDataValidator = joiValidator((data) => {
   Joi.object().keys(
     {
       username: Joi.string().alphanum().min(3).max(30).required(),
@@ -13,9 +14,9 @@ export const createUserDataValidator = (data) => {
       access_token: [Joi.string(), Joi.number()],
     }.validation(data)
   );
-};
+});
 
-export const updateUserDataValidator = (data) => {
+export const updateUserDataValidator = joiValidator((data) => {
   Joi.object().keys(
     {
       name: Joi.string.min(3).max(24),
@@ -23,4 +24,4 @@ export const updateUserDataValidator = (data) => {
       password: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{3,30}$")),
     }.validation(data)
   );
-};
+});
