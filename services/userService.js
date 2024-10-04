@@ -1,3 +1,4 @@
+import { Types } from "mongoose";
 import { UsersModel } from "../models/userModel.js";
 
 // get users
@@ -35,4 +36,14 @@ export const checkUserExists = async (filter) => {
   const oneExists = await UsersModel.exists(filter);
 
   if (oneExists) throw new HttpError(409, "User exists");
+};
+
+export const checkUserExistsBiId = async (id) => {
+  const idIsValid = await Types.ObjectId.isValid(id);
+
+  if (!idIsValid) throw new HttpError(404, "User not found");
+
+  const userExists = await UsersModel.exists({ _id: id });
+
+  if (!userExists) throw new HttpError(404, "User not found");
 };
