@@ -1,5 +1,6 @@
 import { Types } from "mongoose";
 import { UsersModel } from "../models/userModel.js";
+import { signupToken } from "./jwtService.js";
 
 // get users
 
@@ -55,7 +56,7 @@ export const signupUser = async (data) => {
 
   newUser.password = undefined;
 
-  const token = "";
+  const token = signupToken(newUser.id);
 
   return {
     user: newUser,
