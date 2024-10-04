@@ -47,3 +47,18 @@ export const checkUserExistsBiId = async (id) => {
 
   if (!userExists) throw new HttpError(404, "User not found");
 };
+
+export const signupUser = async (data) => {
+  const newUserData = { ...data };
+
+  const newUser = await UsersModel.create(newUserData);
+
+  newUser.password = undefined;
+
+  const token = "";
+
+  return {
+    user: newUser,
+    token,
+  };
+};

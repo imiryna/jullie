@@ -9,4 +9,7 @@ export const checkSignupData = catchAsync(async (req, res, next) => {
   if (error) throw new HttpError(400, "Invalid user data", error);
 
   await checkUserExists({ email: value.email });
+  req.body = value;
+
+  next();
 });
