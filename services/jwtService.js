@@ -1,7 +1,6 @@
 import jwt from "jsonwebtoken";
 import { serverConfig } from "../config/serverConfig.js";
 import HttpError from "../utils/httpError.js";
-const { sign, verify } = jwt;
 
 export const signupToken = (id) => {
   jwt.sign({ id }, serverConfig.jwtSecret, { expiresIn: serverConfig.jwtExpare });
