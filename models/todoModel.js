@@ -1,10 +1,17 @@
 import { Schema } from "mongoose";
 import mongoose from "mongoose";
+import { type } from "os";
+import { title } from "process";
 
 const todoSchema = new Schema({
-  name: {
+  type: {
     type: String,
-    required: [true, "Set name for contact"],
+    enum: ["#todo", "#tobuy", "#towatch"],
+    default: "#todo",
+  },
+  title: {
+    type: String,
+    required: [true, "Set name for todo"],
   },
   description: {
     type: String,

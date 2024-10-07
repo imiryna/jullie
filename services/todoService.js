@@ -13,7 +13,7 @@ export const getTodoBiId = (id) => TodoModel.findById(id);
 export const createTodo = async (todoData) => {
   const newTodo = await TodoModel(todoData);
 
-  return newTodo;
+  return newTodo.save();
 };
 
 export const updateTodoBiId = async (id) => {

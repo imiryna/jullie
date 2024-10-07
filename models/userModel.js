@@ -15,7 +15,7 @@ const usersSchema = new Schema({
   },
   subscription: {
     type: String,
-    enum: ["starter", "pro", "business"],
+    enum: ["user", "pro"],
     default: "starter",
   },
   verify: {

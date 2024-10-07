@@ -10,7 +10,7 @@ export const createUserDataValidator = joiValidator((data) => {
       password: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{3,30}$")),
 
       repeat_password: Joi.ref("password"),
-    }.validation(data)
+    }.validate(data)
   );
 });
 
@@ -25,7 +25,7 @@ export const signupUserDataValidator = joiValidator((data) => {
       repeat_password: Joi.ref("password"),
 
       access_token: [Joi.string(), Joi.number()],
-    }.validation(data)
+    }.validate(data)
   );
 });
 
@@ -35,6 +35,6 @@ export const updateUserDataValidator = joiValidator((data) => {
       name: Joi.string.min(3).max(24),
       email: Joi.string().email(),
       password: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{3,30}$")),
-    }.validation(data)
+    }.validate(data)
   );
 });
