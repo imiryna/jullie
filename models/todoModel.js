@@ -1,7 +1,5 @@
 import { Schema } from "mongoose";
 import mongoose from "mongoose";
-import { type } from "os";
-import { title } from "process";
 
 const todoSchema = new Schema({
   type: {

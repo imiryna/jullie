@@ -29,7 +29,7 @@ export const createNewTodo = catchAsync(async (req, res) => {
 
 export const updateTodo = catchAsync(async (req, res) => {
   const { id } = req.params;
-  const { name, description, dueDate, priority } = req.body;
+  const { title, description, dueDate, priority } = req.body;
 
   const updatedTodo = await updateTodoBiId(id, req.body);
 

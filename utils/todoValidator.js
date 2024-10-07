@@ -11,12 +11,13 @@ export const createTodoDataValidator = (data) => {
 };
 
 export const updateTodoDataValidator = (data) => {
-  Joi.object().keys(
-    {
-      name: Joi.string().min(3).max(12).required(),
+  return Joi.object()
+    .keys({
+      type: Joi.string(),
+      title: Joi.string().min(3).max(12).required(),
       description: Joi.string().min(5),
       dueDate: Joi.date(),
       priority: Joi.string(),
-    }.validate(data)
-  );
+    })
+    .validate(data);
 };

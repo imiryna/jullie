@@ -3,6 +3,7 @@ import { TodoModel } from "../models/todoModel.js";
 import HttpError from "../utils/httpError.js";
 import { catchAsync } from "../utils/catchAsync.js";
 import { createTodoDataValidator, updateTodoDataValidator } from "../utils/todoValidator.js";
+import { todoIsExists } from "../services/todoService.js";
 
 export const checkTodoId = catchAsync(async (req, res, next) => {
   const { id } = req.params;
@@ -24,6 +25,7 @@ export const checkTodoId = catchAsync(async (req, res, next) => {
 
 export const validateTodoCreate = catchAsync(async (req, res, next) => {
   const { value, error } = createTodoDataValidator(req.body);
+  await todoIsExists({ title: value.title, _id: { $ne: req.params.id } });
 
   if (error) throw new HttpError(400, "Invalid todo data");
 

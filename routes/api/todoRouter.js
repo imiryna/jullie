@@ -10,8 +10,8 @@ router.get("/", getAllTodo);
 
 router.post("/", validateTodoCreate, createNewTodo);
 
-router.get("/todos/:id", checkTodoId, getOneTodoBiId);
+router.get("/:id", checkTodoId, getOneTodoBiId);
 
-router.patch("/todos/:id", validateTodoUpdate, checkTodoId, updateTodo);
+router.patch("/:id", validateTodoUpdate, checkTodoId, updateTodo);
 
-router.delete("/todos/:id", checkTodoId, todoDeleted);
+router.delete("/:id", checkTodoId, todoDeleted);

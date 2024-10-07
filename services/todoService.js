@@ -16,18 +16,20 @@ export const createTodo = async (todoData) => {
   return newTodo.save();
 };
 
-export const updateTodoBiId = async (id) => {
-  const updatedData = req.body;
+export const updateTodoBiId = async (id, todoData) => {
+  const todo = await TodoModel.findByIdAndUpdate(id);
 
-  const updatedOne = await TodoModel.findByIdAndUpdate(id, updatedData, { new: true, runValidators: true });
-  return updatedOne;
+  Object.keys(todoData).forEach((key) => {
+    todo[key] = todoData[key];
+  });
+  return todo.save();
 };
 
 // Delete todo bi ID
 
 export const deleteTodo = (id) => TodoModel.deleteOne(id);
 
-export const checkTodoExists = async (filter) => {
+export const todoIsExists = async (filter) => {
   const oneExists = await TodoModel.exists(filter);
 
   if (oneExists) throw new HttpError(409, "Todo exists");
