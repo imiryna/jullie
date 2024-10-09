@@ -4,6 +4,10 @@ import pkg, { compare } from "bcrypt";
 const bcrypt = pkg;
 
 const usersSchema = new Schema({
+  name: {
+    type: String,
+    required: [true, "Set user"],
+  },
   password: {
     type: String,
     required: [true, "Set password for user"],
