@@ -20,7 +20,7 @@ const usersSchema = new Schema({
   subscription: {
     type: String,
     enum: ["user", "pro"],
-    default: "starter",
+    default: "user",
   },
   verify: {
     type: Boolean,
