@@ -1,4 +1,4 @@
-const joiValidator = (validator) => (date) => {
+const joiValidator = (validator) => (data) => {
   const { value, error } = validator(data);
 
   if (!error) return { value };
