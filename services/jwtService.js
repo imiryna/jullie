@@ -3,7 +3,7 @@ import { serverConfig } from "../config/serverConfig.js";
 import HttpError from "../utils/httpError.js";
 
 export const signupToken = (id) => {
-  jwt.sign({ id }, serverConfig.jwtSecret, { expiresIn: serverConfig.jwtExpare });
+  return jwt.sign({ id }, serverConfig.jwtSecret, { expiresIn: serverConfig.jwtExpire });
 };
 
 export const checkToken = (token) => {

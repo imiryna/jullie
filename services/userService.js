@@ -1,6 +1,7 @@
 import { Types } from "mongoose";
 import { UsersModel } from "../models/userModel.js";
 import { signupToken } from "./jwtService.js";
+import HttpError from "../utils/httpError.js";
 
 // get users
 
