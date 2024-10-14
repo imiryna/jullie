@@ -64,3 +64,21 @@ export const signupUser = async (data) => {
     token,
   };
 };
+export const loginUser = async ({ email, password }) => {
+  const user = await UsersModel.findOne({ email }).select("+password");
+
+  if (!user) throw new HttpError(401, "Not authorized");
+
+  const passwordIsValid = user.checkPassword(password, user.password);
+
+  if (!passwordIsValid) throw new HttpError(401, "Not authorized");
+
+  user.password = undefined;
+
+  const token = signupToken(user.id);
+
+  return {
+    user,
+    token,
+  };
+};

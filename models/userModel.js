@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import pkg, { compare } from "bcrypt";
+import pkg from "bcrypt";
 
 const bcrypt = pkg;
 
@@ -42,7 +42,9 @@ usersSchema.pre("save", async function (next) {
 
   next();
 });
-usersSchema.method.checkPassword = (candidate, passwordHash) => compare(candidate, passwordHash);
+usersSchema.method.checkPassword = (candidate, passwordHash) => {
+  bcrypt.compare(candidate, passwordHash);
+};
 
 const UsersModel = model("user", usersSchema);
 
