@@ -42,9 +42,14 @@ usersSchema.pre("save", async function (next) {
 
   next();
 });
-usersSchema.method.checkPassword = (candidate, passwordHash) => {
-  bcrypt.compare(candidate, passwordHash);
+const checkPassword = (candidate, passwordHash) => {
+  const a = bcrypt.compare(candidate, passwordHash);
+  return a;
 };
+
+usersSchema.static({
+  checkPassword: checkPassword,
+});
 
 const UsersModel = model("user", usersSchema);
 

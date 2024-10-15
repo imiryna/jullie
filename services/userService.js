@@ -69,7 +69,7 @@ export const loginUser = async ({ email, password }) => {
 
   if (!user) throw new HttpError(401, "Not authorized");
 
-  const passwordIsValid = user.checkPassword(password, user.password);
+  const passwordIsValid = await UsersModel.checkPassword(password, user.password);
 
   if (!passwordIsValid) throw new HttpError(401, "Not authorized");
 
