@@ -1,7 +1,8 @@
 import HttpError from "../utils/httpError.js";
 import { catchAsync } from "../utils/catchAsync.js";
 import { loginUserDataValidator, signupUserDataValidator } from "../utils/userValidator.js";
-import { checkUserExists } from "../services/userService.js";
+import { checkUserExists, getUserBiId } from "../services/userService.js";
+import { checkToken } from "../services/jwtService.js";
 
 export const checkSignupData = catchAsync(async (req, res, next) => {
   const { value, error } = signupUserDataValidator(req.body);
@@ -22,4 +23,17 @@ export const checkLoginData = catchAsync(async (req, res, next) => {
   req.body = value;
 
   next();
+});
+
+export const protect = catchAsync(async (req, res, next) => {
+  const token = req.headers.authorization?.startWith("Bearer ") && req.headers.authorization.split(" ")[1];
+
+  const userId = checkToken(token);
+  if (!userId) throw new HttpError(401, "Not logged id..");
+
+  const currentUser = await getUserBiId(userId);
+
+  if (!currentUser) throw new HttpError(401, "Not logged id..");
+
+  req.user = currentUser;
 });
