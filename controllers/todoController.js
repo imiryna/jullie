@@ -4,9 +4,14 @@ import { catchAsync } from "../utils/catchAsync.js";
 import HttpError from "../utils/httpError.js";
 
 export const getAllTodo = catchAsync(async (req, res) => {
-  const allTodo = await getTodoList();
+  const { todos, total } = await getTodoList(req.query, req.user);
 
-  res.status(200).json(allTodo);
+  res.status(200).json({
+    message: "Success",
+    todos,
+    total,
+    user: req.user,
+  });
 });
 
 export const getOneTodoBiId = catchAsync(async (req, res) => {
@@ -19,7 +24,7 @@ export const getOneTodoBiId = catchAsync(async (req, res) => {
 });
 
 export const createNewTodo = catchAsync(async (req, res) => {
-  const newTodo = await createTodo(req.body);
+  const newTodo = await createTodo(req.body, req.user);
 
   res.status(201).json({
     message: "Success",
