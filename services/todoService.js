@@ -10,10 +10,16 @@ export const getTodoBiId = (id) => TodoModel.findById(id);
 
 // Create new todo
 
-export const createTodo = async (todoData) => {
-  const newTodo = await TodoModel(todoData);
+export const createTodo = (todoData, owner) => {
+  const { type, title, description, dueDate } = todoData;
 
-  return newTodo.save();
+  return TodoModel.create({
+    type,
+    title,
+    description,
+    dueDate,
+    owner,
+  });
 };
 
 export const updateTodoBiId = async (id, todoData) => {
