@@ -4,17 +4,33 @@ import HttpError from "../utils/httpError.js";
 
 // get todo list
 
-export const getTodoList = () => TodoModel.find(); // To find all todos into database
+export const getTodoList = async (query, owner) => {
+  const findOptions = query.search
+    ? {
+        $or: [{ title: { $regex: query.search, $options: "i" } }, { description: { $regex: query.search, $options: "i" } }, { owner: { $regex: query.search, $options: "i" } }],
+      }
+    : {};
+
+  const todosQuery = TodoModel.find(findOptions); // To find all todos into database
+
+  todosQuery.sort("title");
+
+  const todos = await todosQuery;
+
+  return {
+    todos,
+    total: todos.length,
+  };
+};
 
 export const getTodoBiId = (id) => TodoModel.findById(id);
 
 // Create new todo
 
 export const createTodo = (todoData, owner) => {
-  const { type, title, description, dueDate } = todoData;
+  const { title, description, dueDate } = todoData;
 
   return TodoModel.create({
-    type,
     title,
     description,
     dueDate,

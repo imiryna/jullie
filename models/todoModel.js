@@ -4,13 +4,10 @@ import mongoose from "mongoose";
 
 const todoSchema = new Schema(
   {
-    type: {
+    title: {
       type: String,
       enum: ["#todo", "#tobuy", "#towatch"],
       default: "#todo",
-    },
-    title: {
-      type: String,
       required: true,
     },
     description: {
