@@ -12,14 +12,25 @@ export const getTodoList = async (query, owner) => {
     : {};
 
   const todosQuery = TodoModel.find(findOptions); // To find all todos into database
+  // order = 'ASC' | 'DESC'
+  todosQuery.sort(`${query.order === "DESC" ? "-" : ""}${query.sort ?? "title"}`);
 
-  todosQuery.sort("title");
+  // PAGINATION ===============
+  //todosQuery.limit(5)-limit of number of documents to featch from DB
+
+  const paginationPage = query.page ? +query.page : 1;
+  const paginationLimit = query.limit ? +query.limit : 5;
+
+  const toSkip = (paginationPage - 1) * paginationLimit;
+
+  todosQuery.skip(toSkip).limit(paginationLimit);
 
   const todos = await todosQuery;
+  const total = await TodoModel.countDocuments(findOptions);
 
   return {
     todos,
-    total: todos.length,
+    total,
   };
 };
 
