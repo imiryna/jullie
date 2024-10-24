@@ -1,4 +1,5 @@
 import { model, Schema } from "mongoose";
+import crypto from "crypto";
 import pkg from "bcrypt";
 
 const bcrypt = pkg;
@@ -35,6 +36,9 @@ const usersSchema = new Schema({
 });
 
 usersSchema.pre("save", async function (next) {
+  if (this.isNew) {
+    const emailHash = crypto.createHash("md5").update(this.email).digest("hex");
+  }
   if (!this.isModified("password")) return next();
 
   const salt = await bcrypt.genSalt(10);
