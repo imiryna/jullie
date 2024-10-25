@@ -32,12 +32,13 @@ const usersSchema = new Schema({
     //required: [true, "Verify token is required"],
   },
 
-  avatarURL: String,
+  avatar: String,
 });
 
 usersSchema.pre("save", async function (next) {
   if (this.isNew) {
     const emailHash = crypto.createHash("md5").update(this.email).digest("hex");
+    this.avatar = `https://www.gravatar.com/avatar/${emailHash}.jpg?d=identicon`;
   }
   if (!this.isModified("password")) return next();
 
