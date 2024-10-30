@@ -1,7 +1,7 @@
 import { OAuth2Client } from "google-auth-library";
 
 //nitialised client OAuth2
-// const client = new OAuth2Client();
+const client = new OAuth2Client();
 
 async function main() {
   const oAuth2Client = await getAuthenticatedClient();
