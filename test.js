@@ -46,6 +46,18 @@
 //   });
 // };
 
+function solution(X, A) {
+  // frog sould jumped to anase side of river by leaves
+  const B = [];
+
+  for (let i = 0; i < A.length; i++) {
+    if (!B.includes(A[i]) && A[i] <= X) B.push(A[i]);
+
+    if (B.length === X) return i;
+  }
+  return -1;
+}
+
 // console.log(getValidCandidates(c, s));
 function solution(letters) {
   // Implement your solution here
