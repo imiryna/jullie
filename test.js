@@ -105,3 +105,14 @@ function solution(N) {
   console.log(counter);
 }
 console.log(solution(1041));
+
+// function solution(A) {
+//     // Implement your solution here
+//     const n = A.length;
+//     const arr = new Set(A);
+
+//     for(let i = 1; i<= n; i++){
+//         if(!arr.has(i)) return 0;
+//     }
+//     return 1;
+// }
