@@ -12,6 +12,15 @@ dotenv.config({
   // path: process.env.NODE_ENV === 'production'? './envs/production.env' ? './envs/development.env'
 });
 
+//setup cookies
+app.use(
+  cookieSession({
+    name: "session",
+    keys: ["your_secret_key"],
+    maxAge: 24 * 60 * 60 * 1000, // 24 h
+  })
+);
+
 async function connectToDatabase() {
   try {
     await mongoose.connect(process.env.MONGO_URL);
@@ -37,6 +46,7 @@ const pathPrefix = "/api/v1";
 app.use(`${pathPrefix}/todos`, todoRouter);
 app.use(`${pathPrefix}/users`, userRouter);
 app.use(`${pathPrefix}/auth`, authRouter);
+app.use();
 
 //== Error handler =============
 
