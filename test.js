@@ -90,7 +90,6 @@ function solution(N) {
   //1. n to binary
   //2. iteranain of string
   const binary = N.toString(2);
-  console.log(binary);
 
   let counter = 0;
   let max = 0;
@@ -101,8 +100,6 @@ function solution(N) {
       counter = 0;
     }
   }
-  console.log(max);
-  console.log(counter);
 }
 console.log(solution(1041));
 
