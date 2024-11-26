@@ -86,10 +86,10 @@ function solution(letters) {
   return sum;
 }
 
-function solution(N) {
+function solution(No) {
   //1. n to binary
   //2. iteranain of string
-  const binary = N.toString(2);
+  const binary = No.toString(2);
 
   let counter = 0;
   let max = 0;
