@@ -7,19 +7,15 @@ import { router as todoRouter } from "./routes/api/todoRouter.js";
 import { router as userRouter } from "./routes/api/userRouter.js";
 import { router as authRouter } from "./routes/api/authRouter.js";
 import { globalErrorHandler } from "./controllers/errorController.js";
-import { OAuth2Client } from "google-auth-library";
+// import { OAuth2Client } from "google-auth-library";
+//swagger
+
+import swaggerUi from "swagger-ui-express";
+import swaggerDocument from "./docs/swagger.json" assert { type: "json" };
+
 dotenv.config({
   // path: process.env.NODE_ENV === 'production'? './envs/production.env' ? './envs/development.env'
 });
-
-//setup cookies
-app.use(
-  cookieSession({
-    name: "session",
-    keys: ["your_secret_key"],
-    maxAge: 24 * 60 * 60 * 1000, // 24 h
-  })
-);
 
 async function connectToDatabase() {
   try {
@@ -35,6 +31,15 @@ const app = express();
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
+//setup cookies
+// app.use(
+//   cookieSession({
+//     name: "session",
+//     keys: ["your_secret_key"],
+//     maxAge: 24 * 60 * 60 * 1000, // 24 h
+//   })
+// );
+
 app.use(morgan(formatsLogger));
 app.use(cors());
 app.use(express.json());
@@ -43,10 +48,11 @@ app.use(express.static("public"));
 // =============================
 const pathPrefix = "/api/v1";
 
-app.use(`${pathPrefix}/todos`, todoRouter);
-app.use(`${pathPrefix}/users`, userRouter);
-app.use(`${pathPrefix}/auth`, authRouter);
-app.use();
+app.use(`/api/v1/todos`, todoRouter);
+app.use(`/api/v1/users`, userRouter);
+app.use(`/api/v1/auth`, authRouter);
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 //== Error handler =============
 

@@ -7,10 +7,11 @@
   "type": "module",
   "scripts": {
     "start": "cross-env NODE_ENV=production node ./server.js",
-    "start:dev": "cross-env NODE_ENV=development nodemon ./server.js",
+    "start:dev": "node ./docs/swagger.js && cross-env NODE_ENV=development nodemon ./server.js",
     "lint": "eslint **/*.js",
     "lint:fix": "eslint --fix **/*.js",
-    "test": "jest"
+    "test": "jest",
+    "swagger-autogen": "node ./docs/swagger.js"
   },
   "keywords": [
     "todo"
@@ -32,6 +33,7 @@
     "nodemon": "^3.0.2",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
+    "swagger-autogen": "^2.23.7",
     "swagger-ui": "^5.18.2",
     "swagger-ui-express": "^5.0.1"
   },

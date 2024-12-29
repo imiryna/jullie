@@ -4,7 +4,7 @@ import { login, signup } from "../../controllers/authController.js";
 
 export const router = Router();
 
-router.use(protect);
+// router.use(protect);
 
 router.post("/signup", checkSignupData, signup);
 router.post("/login", checkLoginData, login);
